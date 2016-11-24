@@ -62,6 +62,8 @@ public class LeftRightItem extends RelativeLayout {
                         .WRAP_CONTENT : rightWidth);
         valueParams.addRule(RelativeLayout.CENTER_VERTICAL);
         valueParams.addRule(RelativeLayout.RIGHT_OF, leftTv.getId());
+        valueParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
         addView(rightTv, valueParams);
         rightTv.setPadding(0, 0, 0, 0);
         rightTv.setId(style.getResourceId(R.styleable.CommonItem_item_right_id,
