@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.IntRange;
 import android.widget.ImageView;
 
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * 图片上传类
@@ -58,6 +60,23 @@ public class UpLoadImage implements IUpLoadImage {
      */
     @Override
     public String dealPicWithCrop(int resultCode, Intent data) {
+        return dealPicWithCrop(resultCode, data, 1, 1, 300, 300);
+    }
+
+    /**
+     * 处理相机并且裁剪
+     *
+     * @param resultCode
+     * @param data
+     * @param x          aspect ratio X
+     * @param y          aspect ratio Y
+     * @param width      max cropped image width
+     * @param height     max cropped image height
+     * @return
+     */
+    @Override
+    public String dealPicWithCrop(int resultCode, Intent data, float x, float y, @IntRange(from =
+            100) int width, @IntRange(from = 100) int height) {
         if (resultCode != Activity.RESULT_OK)
             return null;
         if (data != null && data.getData() != null) {
@@ -66,12 +85,13 @@ public class UpLoadImage implements IUpLoadImage {
                 imageDialog.setImagePath(mImagePath);
         }
         File file = new File(imageDialog.getImagePath());
-        UCrop.of(Uri.fromFile(file), Uri.fromFile(new File(mContext.getCacheDir(), "headImg")))
-                .withAspectRatio(1, 1)
-                .withMaxResultSize(300, 300)
+        UCrop.of(Uri.fromFile(file), Uri.fromFile(new File(mContext.getCacheDir(), UUID.randomUUID().toString())))
+                .withAspectRatio(x, y)
+                .withMaxResultSize(width, height)
                 .start((Activity) mContext);
         return imageDialog.getImagePath();
     }
+
 
     @Override
     public String dealPic(int resultCode, Intent data) {
@@ -114,4 +134,9 @@ public class UpLoadImage implements IUpLoadImage {
     public void setImagePath(Uri uri) {
         imageDialog.setImagePath(ImageUtils.getImageAbsolutePath(mContext, uri));
     }
+
+    public String getImagePath() {
+        return imageDialog.getImagePath();
+    }
+
 }

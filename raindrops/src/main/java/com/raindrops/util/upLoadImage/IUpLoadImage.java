@@ -1,6 +1,7 @@
 package com.raindrops.util.upLoadImage;
 
 import android.content.Intent;
+import android.support.annotation.IntRange;
 import android.widget.ImageView;
 
 /**
@@ -19,5 +20,8 @@ public interface IUpLoadImage {
     void showDialog();
 
     void dismissDialog();
+
+    String dealPicWithCrop(int resultCode, Intent data, float x, float y, @IntRange(from =
+            100) int width, @IntRange(from = 100) int height);
 
 }

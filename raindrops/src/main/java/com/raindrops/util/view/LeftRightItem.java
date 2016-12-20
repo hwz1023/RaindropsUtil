@@ -30,11 +30,11 @@ public class LeftRightItem extends RelativeLayout {
 
     public LeftRightItem(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray style = context.obtainStyledAttributes(attrs, R.styleable.CommonItem, 0, 0);
+        TypedArray style = context.obtainStyledAttributes(attrs, R.styleable.raindropsCommonItem, 0, 0);
         int width = getWidth() - getPaddingLeft() - getPaddingRight();
         Log.e("LeftRightItem width", width + "");
-        int leftWidth = (int) style.getDimension(R.styleable.CommonItem_item_left_width, 0);
-        int rightWidth = (int) style.getDimension(R.styleable.CommonItem_item_right_width, 0);
+        int leftWidth = (int) style.getDimension(R.styleable.raindropsCommonItem_item_left_width, 0);
+        int rightWidth = (int) style.getDimension(R.styleable.raindropsCommonItem_item_right_width, 0);
 
         if (rightWidth == 0 && leftWidth != 0) {
             rightWidth = width - leftWidth;
@@ -52,7 +52,7 @@ public class LeftRightItem extends RelativeLayout {
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         addView(leftTv, layoutParams);
 
-        leftTv.setId(style.getResourceId(R.styleable.CommonItem_item_left_id,
+        leftTv.setId(style.getResourceId(R.styleable.raindropsCommonItem_item_left_id,
                 R.id.item_left));
         rightTv = new EditText(context);
         rightTv.setBackgroundColor(0);
@@ -66,28 +66,28 @@ public class LeftRightItem extends RelativeLayout {
 
         addView(rightTv, valueParams);
         rightTv.setPadding(0, 0, 0, 0);
-        rightTv.setId(style.getResourceId(R.styleable.CommonItem_item_right_id,
+        rightTv.setId(style.getResourceId(R.styleable.raindropsCommonItem_item_right_id,
                 R.id.item_right));
 
         rightTv.setSingleLine(true);
         rightTv.setEllipsize(TextUtils.TruncateAt.END);
         rightTv.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 
-        leftTv.setText(style.getText(R.styleable.CommonItem_item_left_text));
-        leftTv.setTextColor(style.getColor(R.styleable.CommonItem_item_left_text_color, 0xff3B3B3B));
+        leftTv.setText(style.getText(R.styleable.raindropsCommonItem_item_left_text));
+        leftTv.setTextColor(style.getColor(R.styleable.raindropsCommonItem_item_left_text_color, 0xff3B3B3B));
 
         leftTv.setTextSize(DensityUtils.px2sp(
-                style.getDimension(R.styleable.CommonItem_item_left_text_size, 15)));
+                style.getDimension(R.styleable.raindropsCommonItem_item_left_text_size, 15)));
 
-        rightTv.setText(style.getText(R.styleable.CommonItem_item_right_text));
-        rightTv.setTextColor(style.getColor(R.styleable.CommonItem_item_right_text_color, 0xff848484));
+        rightTv.setText(style.getText(R.styleable.raindropsCommonItem_item_right_text));
+        rightTv.setTextColor(style.getColor(R.styleable.raindropsCommonItem_item_right_text_color, 0xff848484));
         rightTv.setTextSize(DensityUtils.px2sp(style.getDimension(
-                R.styleable.CommonItem_item_right_text_size, DensityUtils.sp2px(15f))));
-        rightTv.setHintTextColor(style.getColor(R.styleable.CommonItem_item_right_hint_color,
+                R.styleable.raindropsCommonItem_item_right_text_size, DensityUtils.sp2px(15f))));
+        rightTv.setHintTextColor(style.getColor(R.styleable.raindropsCommonItem_item_right_hint_color,
                 0xff848484));
-        rightTv.setHint(style.getString(R.styleable.CommonItem_item_right_hint));
+        rightTv.setHint(style.getString(R.styleable.raindropsCommonItem_item_right_hint));
 
-        boolean rightCanEdit = style.getBoolean(R.styleable.CommonItem_item_right_can_edit, false);
+        boolean rightCanEdit = style.getBoolean(R.styleable.raindropsCommonItem_item_right_can_edit, false);
         setRightFocus(rightCanEdit);
 
         style.recycle();
@@ -123,6 +123,7 @@ public class LeftRightItem extends RelativeLayout {
         rightTv.setFocusable(b);
         rightTv.setFocusableInTouchMode(b);
         rightTv.setCursorVisible(b);
+        rightTv.setClickable(b);
         return this;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CommonItem">
+    <declare-styleable name="raindropsCommonItem">
         <!-- 左边标题颜色 -->
         <attr name="item_left_background" format="reference|color"/>
         <!-- 左边标题颜色 -->
