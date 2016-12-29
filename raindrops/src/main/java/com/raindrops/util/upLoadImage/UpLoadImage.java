@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.IntRange;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -84,12 +86,27 @@ public class UpLoadImage implements IUpLoadImage {
             if (mImagePath != null)
                 imageDialog.setImagePath(mImagePath);
         }
-        File file = new File(imageDialog.getImagePath());
-        UCrop.of(Uri.fromFile(file), Uri.fromFile(new File(mContext.getCacheDir(), UUID.randomUUID().toString())))
-                .withAspectRatio(x, y)
-                .withMaxResultSize(width, height)
-                .start((Activity) mContext);
+        try {
+            gotoCrop(x, y, width, height);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(mContext, "拍摄失败请重试", Toast.LENGTH_SHORT).show();
+        }
         return imageDialog.getImagePath();
+    }
+
+    private void gotoCrop(float x, float y, @IntRange(from =
+            100) int width, @IntRange(from = 100) int height) throws IOException {
+        if (imageDialog.getImagePath() != null) {
+            File file = new File(imageDialog.getImagePath());
+            UCrop.of(Uri.fromFile(file), Uri.fromFile(new File(mContext.getCacheDir(), UUID
+                    .randomUUID().toString())))
+                    .withAspectRatio(x, y)
+                    .withMaxResultSize(width, height)
+                    .start((Activity) mContext);
+        } else {
+            Toast.makeText(mContext, "拍摄失败请重试", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
