@@ -83,6 +83,7 @@ public class HttpUtil {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(url)
                 .build();
+        instance.retrofit.create(instance.httpService.getClass());
         return instance;
     }
 
@@ -97,6 +98,7 @@ public class HttpUtil {
                 .baseUrl(instance.retrofit.baseUrl())
                 .build();
         instance.okHttpClient = client;
+        instance.retrofit.create(instance.httpService.getClass());
         return instance;
     }
 
