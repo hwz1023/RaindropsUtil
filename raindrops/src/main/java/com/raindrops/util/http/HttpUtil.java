@@ -21,6 +21,7 @@ public class HttpUtil {
      * 超时时间
      */
     private static final int DEFAULT_TIMEOUT = 10;
+
     /**
      * retrofit
      */
@@ -29,6 +30,9 @@ public class HttpUtil {
      * 接口请求
      */
     private static volatile HttpUtil instance = null;
+
+
+    private OkHttpClient okHttpClient;
 
     /**
      * @param okHttpClient
@@ -43,6 +47,7 @@ public class HttpUtil {
             httpClientBuilder.addInterceptor(new LoggerInterceptor());
             okHttpClient = httpClientBuilder.build();
         }
+        this.okHttpClient = okHttpClient;
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -64,6 +69,34 @@ public class HttpUtil {
                 }
             }
         }
+        return instance;
+    }
+
+
+    public static HttpUtil bindBaseUrl(String url) throws Throwable {
+        if (instance == null)
+            throw new Throwable("should initHttpUil");
+        instance.retrofit
+                = new Retrofit.Builder()
+                .client(instance.okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(url)
+                .build();
+        return instance;
+    }
+
+    public static HttpUtil bindOkHttpClient(OkHttpClient client) throws Throwable {
+        if (instance == null)
+            throw new Throwable("should initHttpUil");
+        instance.retrofit
+                = new Retrofit.Builder()
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(instance.retrofit.baseUrl())
+                .build();
+        instance.okHttpClient = client;
         return instance;
     }
 
