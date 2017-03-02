@@ -32,8 +32,6 @@ public class HttpUtil {
     private static volatile HttpUtil instance = null;
 
 
-    private OkHttpClient okHttpClient;
-
     /**
      * @param okHttpClient
      * @param url          地址域名
@@ -47,7 +45,6 @@ public class HttpUtil {
             httpClientBuilder.addInterceptor(new LoggerInterceptor());
             okHttpClient = httpClientBuilder.build();
         }
-        this.okHttpClient = okHttpClient;
         retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -72,35 +69,6 @@ public class HttpUtil {
         return instance;
     }
 
-
-    public static HttpUtil bindBaseUrl(String url) throws Throwable {
-        if (instance == null)
-            throw new Throwable("should initHttpUil");
-        instance.retrofit
-                = new Retrofit.Builder()
-                .client(instance.okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(url)
-                .build();
-        instance.retrofit.create(instance.httpService.getClass());
-        return instance;
-    }
-
-    public static HttpUtil bindOkHttpClient(OkHttpClient client) throws Throwable {
-        if (instance == null)
-            throw new Throwable("should initHttpUil");
-        instance.retrofit
-                = new Retrofit.Builder()
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(instance.retrofit.baseUrl())
-                .build();
-        instance.okHttpClient = client;
-        instance.retrofit.create(instance.httpService.getClass());
-        return instance;
-    }
 
     public static HttpUtil getInstance() {
         return initHttpUtil(null, "");
