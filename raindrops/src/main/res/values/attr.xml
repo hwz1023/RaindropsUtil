@@ -2,33 +2,33 @@
 <resources>
     <declare-styleable name="raindropsCommonItem">
         <!-- 左边标题颜色 -->
-        <attr name="item_left_background" format="reference|color"/>
+        <attr name="raindrops_item_left_background" format="reference|color" />
         <!-- 左边标题颜色 -->
-        <attr name="item_left_text_color" format="color"/>
+        <attr name="raindrops_item_left_text_color" format="color" />
         <!-- 右边内容颜色 -->
-        <attr name="item_right_text_color" format="color"/>
+        <attr name="raindrops_item_right_text_color" format="color" />
         <!-- 右边内容提示文字颜色 -->
-        <attr name="item_right_hint_color" format="color"/>
+        <attr name="raindrops_item_right_hint_color" format="color" />
         <!-- 右边内容提示文字颜色 -->
-        <attr name="item_right_hint" format="string"/>
+        <attr name="raindrops_item_right_hint" format="string" />
         <!-- 左边标题字体大小 -->
-        <attr name="item_left_text_size" format="dimension"/>
+        <attr name="raindrops_item_left_text_size" format="dimension" />
         <!-- 右边内容字体大小 -->
-        <attr name="item_right_text_size" format="dimension"/>
+        <attr name="raindrops_item_right_text_size" format="dimension" />
         <!-- 左边标题文字 -->
-        <attr name="item_left_text" format="string"/>
+        <attr name="raindrops_item_left_text" format="string" />
         <!-- 右边内容文字 -->
-        <attr name="item_right_text" format="string"/>
+        <attr name="raindrops_item_right_text" format="string" />
         <!-- 左边标题ID -->
-        <attr name="item_left_id" format="reference"/>
+        <attr name="raindrops_item_left_id" format="reference" />
         <!-- 右边内容ID -->
-        <attr name="item_right_id" format="reference"/>
+        <attr name="raindrops_item_right_id" format="reference" />
         <!-- 右边宽度 -->
-        <attr name="item_right_width" format="dimension"/>
+        <attr name="raindrops_item_right_width" format="dimension" />
         <!-- 左边宽度 -->
-        <attr name="item_left_width" format="dimension"/>
+        <attr name="raindrops_item_left_width" format="dimension" />
         <!-- 右边是否可编辑 -->
-        <attr name="item_right_can_edit" format="boolean"/>
+        <attr name="raindrops_item_right_can_edit" format="boolean" />
 
     </declare-styleable>
 </resources>
