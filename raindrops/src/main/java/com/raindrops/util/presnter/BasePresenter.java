@@ -38,7 +38,11 @@ public abstract class BasePresenter<V extends MvpView, T> implements
         return new HttpSubscriber<T>(tag) {
             @Override
             public void onSuccess(T t, int tag) {
-                BasePresenter.this.onSuccess(t, tag);
+                try {
+                    BasePresenter.this.onSuccess(t, tag);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
